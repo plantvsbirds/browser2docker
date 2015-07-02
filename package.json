@@ -1,0 +1,17 @@
+{
+  "name": "browser2docker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hong Lin",
+  "license": "ISC",
+  "dependencies": {
+    "dockerode": "^2.1.5",
+    "express": "^4.13.0",
+    "socket.io": "^1.3.5",
+    "socket.io-stream": "^0.8.0"
+  }
+}
