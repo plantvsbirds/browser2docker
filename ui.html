@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>=== Brw2Dckr ===</title>
+    <link rel="stylesheet" href="public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="public/css/bootstrap.css.map">
+    <link rel="stylesheet" href="public/css/brw2dckr.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header clearfix">
+            <h3 class="text-muted">BRW2DCKR - Docker web terminal</h3>
+        </div>
+
+
+
+
+        <div class="jumbotron" id="page-start">
+            <p>everything working correctly(so far)</p>
+            <h2>Now COPY and PASTE following info given by boot2docker</h2>
+            <div class="lead well">
+
+                <div>
+
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#auto-detect" aria-controls="home" role="tab" data-toggle="tab">Paste'n Go</a>
+                        </li>
+                        <li role="presentation"><a href="#input-one-by-one" aria-controls="settings" role="tab" data-toggle="tab">Input manually</a>
+                        </li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane" id="input-one-by-one">
+
+
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon" id="sizing-addon1">DOCKER_TLS_VERIFY</span>
+                                <input type="text" class="form-control" placeholder="1?" aria-describedby="sizing-addon1" value="1" disabled>
+                            </div>
+
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon" id="sizing-addon1">DOCKER_HOST</span>
+                                <input type="text" class="form-control" placeholder="1?" aria-describedby="sizing-addon1" value="tcp://???.???.???.???:????">
+                            </div>
+
+
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon" id="sizing-addon1">DOCKER_CERT_PATH</span>
+                                <input type="text" class="form-control" placeholder="1?" aria-describedby="sizing-addon1" value="/??/.boot2docker/certs/boot2docker-vm">
+                            </div>
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane active" id="auto-detect">
+                            <textarea name="" id="" cols="30" rows="10">
+                                To connect the Docker client to the Docker daemon, please set: export DOCKER_TLS_VERIFY=? export DOCKER_HOST=tcp://???.???.???.???:???? export DOCKER_CERT_PATH=/??/.boot2docker/certs/boot2docker-vm
+                            </textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <p><a class="btn btn-lg btn-success" href="#" role="button">Connect</a>
+            </p>
+        </div>
+
+
+
+
+        <div class="jumbotron" id="page-term">
+            <p>Cooonecting</p>
+
+        </div>
+
+        <footer class="footer">
+            <p>Hong Lin Production, 2015</p>
+        </footer>
+
+    </div>
+    <script src="public/js/jquery.min.js"></script>
+    <script src="public/js/bootstrap.min.js"></script>
+</body>
+
+</html>
