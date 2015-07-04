@@ -1,3 +1,16 @@
+window.socket = io();
+
+socket.on('disconnect', function (){
+  $('#page-term').html('<p id="loading-text">Cooonecting</p>');
+  startLoading();
+})
+
+
+socket.on('connect', function (){
+  startLoading();
+  removeLoading();
+})
+
 function getKeyFromEvent(evt) {
   evt = evt || window.event;
   return {
@@ -86,10 +99,8 @@ function removeLoading(){
   clearInterval(loadingInterval);
 }
 
-
 $(function (){
   $('#connect-btn').click(function (){
-    window.socket = io();
     goToPageTerm();
     startLoading();
     socket.on('docker-print', function (char) {
