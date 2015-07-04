@@ -26,7 +26,7 @@ document.onkeydown = function(evt) {
     evt.preventDefault();
     socket.emit('keyboard-hit', '127');
   }
-
+  console.log(charCode);
 }
 
 document.onkeypress = function(evt) {
@@ -68,7 +68,7 @@ function parsePastedContent(){
     targetDockerConfig[property] = exceptValue(property);
   })
 
-  //alert(JSON.stringify(targetDockerConfig));
+  alert(JSON.stringify(targetDockerConfig));
   
   window.targetDockerConfig = targetDockerConfig;
   return targetDockerConfig;
@@ -103,6 +103,12 @@ $(function (){
   $('#connect-btn').click(function (){
     goToPageTerm();
     startLoading();
+    var dockerConfig = parsePastedContent();
+
+    $.get('/create-container', dockerConfig, function (){
+      alert('Container created!!');
+    })
+
     socket.on('docker-print', function (char) {
       removeLoading();
       var char = char.split('');
