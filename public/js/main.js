@@ -1,9 +1,32 @@
-document.onkeypress = function(evt) {
+function getKeyFromEvent(evt) {
   evt = evt || window.event;
-  var charCode = evt.which || evt.keyCode;
-  var charStr = String.fromCharCode(charCode);
+  return {
+    charCode : evt.which || evt.keyCode,
+    charStr : String.fromCharCode(evt.which || evt.keyCode)
+  }
+}
+document.onkeydown = function(evt) {
+  var charCode = getKeyFromEvent(evt).charCode;
+  var charStr = getKeyFromEvent(evt).charStr;
+  //alert(charStr);
+  if (charCode == 8) {
+    evt.preventDefault();
+    socket.emit('keyboard-hit', '127');
+  }
+
+}
+
+document.onkeypress = function(evt) {
+  evt.preventDefault();
+  evt.stopPropagation();
+  evt = evt || window.event;
+  var charCode = getKeyFromEvent(evt).charCode;
+  var charStr = getKeyFromEvent(evt).charStr;
   //alert(charStr.charCodeAt(0));
+  socket.emit('keyboard-hit', charCode.toString());  
+  window.scrollTo(0,document.body.scrollHeight);
   
+  return false;
 };
 function asciiOf(char){
   return char.charCodeAt(0);
@@ -80,7 +103,7 @@ $(function (){
       }
 
       asciiArray.forEach(function (code){
-        console.log(code, String.fromCharCode(code));
+        //console.log(code, String.fromCharCode(code));
         var cases = {
           8 : function (){
             $('#page-term span:last-child').remove();
@@ -99,6 +122,7 @@ $(function (){
           cases[code]();
         else
           $('#page-term').append('<span>'+String.fromCharCode(code)+'</span>');
+        window.scrollTo(0,document.body.scrollHeight);
         //$('#page-term span:last-child').css('width', (1.25 * char.length) + '%');
       })
       

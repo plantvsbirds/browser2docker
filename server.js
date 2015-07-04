@@ -82,7 +82,8 @@ ourDocker.createContainer({
     })
     io.on('connection', function(socket){
       (socket).on('keyboard-hit', function(content, data) {
-        stream.write(content);
+        var character = String.fromCharCode(parseInt(content));
+        stream.write(character);
       });
     });
 
