@@ -1,8 +1,25 @@
 var express = require('express');
 var Docker = require('dockerode');
+var path = require('path');
 var fs = require('fs');
 
+var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
+app.use('/public', express.static('public'));
+
+io.on('connection', function(socket){
+  console.log('a user connected');
+});
+
+app.get('/', function (req,res) {
+  res.sendFile(path.join(__dirname , 'ui.html'))
+});
+
+http.listen(3000, function(){
+  console.log('listening on *:3000');
+});
 
 /*
 Writing /Users/henry/.boot2docker/certs/boot2docker-vm/ca.pem
