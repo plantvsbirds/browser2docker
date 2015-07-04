@@ -6,12 +6,9 @@ var fs = require('fs');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-
+var ss = require('socket.io-stream');
 app.use('/public', express.static('public'));
 
-io.on('connection', function(socket){
-  console.log('a user connected');
-});
 
 app.get('/', function (req,res) {
   res.sendFile(path.join(__dirname , 'ui.html'))
@@ -66,7 +63,7 @@ console.log('hi')
 ourDocker.createContainer({
  Tty: true  , 
  Image: 'ubuntu', 
- Cmd: ['bash'], 
+ Cmd: ['sh'], 
  name: (Math.random()*100000).toString(),
   'OpenStdin': true,
 }, function(err, container) {
@@ -79,6 +76,16 @@ ourDocker.createContainer({
     process.stdin.resume();
     process.stdin.setRawMode(true);
     process.stdin.pipe(stream);
+
+    stream.on('data', function (chunk) {
+      io.emit('docker-print', chunk.toString());
+    })
+    io.on('connection', function(socket){
+      (socket).on('keyboard-hit', function(content, data) {
+        stream.write(content);
+      });
+    });
+
 
     process.stdin.on('data', function (chunk) {
       if ((new String(chunk)).charCodeAt(0) === 3) {
